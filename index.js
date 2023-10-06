@@ -1,21 +1,49 @@
 const inquirer = require('inquirer')
 const jest = require('jest')
 const fs = require('fs')
+const {Circle, Square, Triangle} = require('./Assets/shapes')
 
+
+class Svg{
+    constructor(){
+        this.shape = ''
+        this.text =''
+
+    
+    }
+    render(){
+        return '<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">' +
+        this.shape +
+        this.text +
+        '</svg>'
+    }
+    //Method here fix the x and y and font size
+    setTextColorMethod(textValue, textcolorValue){
+        this.text = `<text x="${50}" y="${50}" font-size="${25}" text-anchor="middle" alignment-baseline="middle" fill="${textValue}">${textcolorValue}</text>`
+    }
+    setShapeMethod(shape){
+        this.shape = shape.render();
+    }
+}
 
 const iqprompts = function prompts(){
     inquirer
-        .prompts([
+        .prompt([
             {
                 type: 'input',
                 name: 'textValue',
                 message: 'Please enter 3 letters that will appear in your logo: '
             },
             {
-                type: 'checkbox',
+                type: 'list',
                 name: 'shapeValue',
                 message: 'What Shape would you like?:',
                 choices: ['Circle','Square','Triangle'],
+            },
+            {
+                type: 'input',
+                name: 'textcolorValue',
+                message: 'Please enter the text color (Note that you can enter a hexadecimal code if you want): '
             },
             {
                 type: 'input',
@@ -29,8 +57,31 @@ const iqprompts = function prompts(){
             }
         ]).then((inputValueArray) => {
           console.log('Responses were: ', inputValueArray)
-        })
-        // For this .then you need to pass on the prompts to the SVG generator function.
+        //   return generateImage(inputValueArray);
+        let shapeFinal
+
+        if(inputValueArray.shapeValue === 'Circle') {
+            console.log("input", inputValueArray)
+            shapeFinal = new Circle()
+        }else if(inputValueArray.shapeValue === 'Square'){
+            console.log("input", inputValueArray)
+            shapeFinal = new Square()
+        }
+        else {
+            console.log("input", inputValueArray)
+            shapeFinal = new Triangle()
+        } 
+
+        shapeFinal.setcolor(inputValueArray.textcolorValue)
+        const svg = new Svg()
+        svg.setTextColorMethod(inputValueArray.textValue, inputValueArray.textcolorValue)
+        // Above is text
+        svg.setShapeMethod(shapeFinal)
+        // Above is shape
+        return fs.writeFileSync('Logo.svg', svg.render())
+        }).catch((error) => {
+            console.error('Error:', error);
+          });
 };
 
 
