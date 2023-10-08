@@ -6,22 +6,23 @@ class Shape {
         this.color = color
     }
 }
-//Fix these shape to render the correct shape
+//Fix these shape to render the correct shape ISSUE
 class Circle extends Shape {
     render(){
-        return `<circle cx="150" cy="150" r="150" fill="${this.color}" />`
+        return `<circle cx="50%" cy="50%" r="150" fill="${this.color}" />`
     }
 };
 
 class Square extends Shape {
     render(){
-        return `<square cx="150" cy="150" r="150" fill="${this.color}" />`
+        return `<rect x="100" y="100" width="300" height="300" fill="${this.color}" />`
     }
 };
 
 class Triangle extends Shape {
     render(){
-        return `<triangle cx="150" cy="150" r="150" fill="${this.color}" />`
+        const triangulate = "250,125 375,375 125,375";
+        return `<polygon points="${triangulate}" fill="${this.color}" />`;
     }
 };
 

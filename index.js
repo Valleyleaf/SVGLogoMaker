@@ -12,14 +12,14 @@ class Svg{
     
     }
     render(){
-        return '<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">' +
+        return '<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">' +
         this.shape +
         this.text +
         '</svg>'
     }
-    //Method here fix the x and y and font size
+    //Method here fix the x and y and font size. Color here works, it does not in the shape, fix.
     setTextColorMethod(textValue, textcolorValue){
-        this.text = `<text x="${50}" y="${50}" font-size="${25}" text-anchor="middle" alignment-baseline="middle" fill="${textValue}">${textcolorValue}</text>`
+        this.text = `<text x="50%" y="50%" font-size="${80}" text-anchor="middle" alignment-baseline="middle" fill="${textcolorValue}">${textValue}</text>`
     }
     setShapeMethod(shape){
         this.shape = shape.render();
@@ -50,14 +50,8 @@ const iqprompts = function prompts(){
                 name: 'colorValue',
                 message: 'Please enter a Fill color (Note that you can enter a hexadecimal code if you want): '
             },
-            {
-                type: 'input',
-                name: 'borderColorValue',
-                message: 'Please enter a Border color (Note that you can enter a hexadecimal code if you want): '
-            }
         ]).then((inputValueArray) => {
           console.log('Responses were: ', inputValueArray)
-        //   return generateImage(inputValueArray);
         let shapeFinal
 
         if(inputValueArray.shapeValue === 'Circle') {
@@ -72,7 +66,7 @@ const iqprompts = function prompts(){
             shapeFinal = new Triangle()
         } 
 
-        shapeFinal.setcolor(inputValueArray.textcolorValue)
+        shapeFinal.setcolor(inputValueArray.colorValue)
         const svg = new Svg()
         svg.setTextColorMethod(inputValueArray.textValue, inputValueArray.textcolorValue)
         // Above is text
