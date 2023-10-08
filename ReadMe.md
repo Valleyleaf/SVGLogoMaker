@@ -23,7 +23,7 @@ This depends on npm modules Inquirer and Jest
 Download, run the index.js file using the node command and then follow the prompts to generate your image
 
 ## 💊Test
-N/A
+This application uses JEST. Currently is able to do a complete test to Shapes.js Module
 
 ## 👤Questions
 Find me at https://github.com/Valleyleaf or reach out to me
