@@ -1,4 +1,4 @@
-const inquirer = require('inquirer')
+const inquirer = require("inquirer")
 const jest = require('jest')
 const fs = require('fs')
 const {Circle, Square, Triangle} = require('./Assets/shapes')
