@@ -1,6 +1,29 @@
-const index = require('../index.js');
+const {Circle, Triangle, Square} = require('../Assets/shapes.js');
 
-test('Ensures we have our index.', () => {
-    expect(index).not.toBeFalsy();
+describe('Testing shape', () => {
+    test('Creating red circle', () => {
+            const circle = new Circle()
+            circle.setcolor('red');
+            let result = `<circle cx="50%" cy="50%" r="150" fill="red" />`
+            expect(result).toEqual(circle.render())
+    })
 })
-// This one should give me a fail.
+
+describe('Testing shape', () => {
+    test('Creating red circle', () => {
+            const triangle = new Triangle()
+            triangle.setcolor('red');
+            const triangulate = "250,125 375,375 125,375";
+            let result = `<polygon points="${triangulate}" fill="red" />`
+            expect(result).toEqual(triangle.render())
+    })
+})
+
+describe('Testing shape', () => {
+    test('Creating red circle', () => {
+            const square = new Square()
+            square.setcolor('red');
+            let result = `<rect x="100" y="100" width="300" height="300" fill="red" />`
+            expect(result).toEqual(square.render())
+    })
+})
